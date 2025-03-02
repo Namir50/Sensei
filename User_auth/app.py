@@ -5,15 +5,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_owner:owners@localhost/sensei_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['SECRET_KEY'] = 'mysecretkey'  #Secret key for session management
 
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    password_hash = db.Column(db.String(150), nullable=False)  # Renamed field for clarity
+    id = db.Column(db.Integer, primary_key=True)  #Unique ID for each user
+    name = db.Column(db.String(100), nullable=False)  # User's full name (required)
+    email = db.Column(db.String(100), nullable=False, unique=True)  # User's email (must be unique)
+    password_hash = db.Column(db.String(150), nullable=False) # Encrypted password (hashed)
 
 @app.route('/')
 def landing():
@@ -25,20 +25,22 @@ def teacher():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        password_hash = generate_password_hash(request.form['password'], method='pbkdf2:sha256')
+    if request.method == 'POST':  # Checks if the form is submitted
+        name = request.form['name']  # Get user name from the form
+        email = request.form['email']  # Get user email from the form
+        password_hash = generate_password_hash(request.form['password'], method='pbkdf2:sha256')   #Hashing the password
 
+        #Checking if the email is already registered
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             flash('Email already exists, Please log in', 'error') 
             # Flash error message
             return render_template('register.html')
-
+        #else
+        #Creating a new user record in the database
         new_user = User(name=name, email=email, password_hash=password_hash)  # Using password_hash
-        db.session.add(new_user)
-        db.session.commit()
+        db.session.add(new_user) #Adding new user to the session
+        db.session.commit()  #Commits changes to the database
 
         flash('Registration Successful')
 
@@ -46,12 +48,13 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method == 'POST':  #Checking if login form ia submitted
         email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()  # Look up user in database with the help of email
 
-        if user and check_password_hash(user.password_hash, password):  # Corrected password check
+        #Checks if user exists and the password is correct
+        if user and check_password_hash(user.password_hash, password):  
             flash('Login Successful!')
             return redirect(url_for('home'))
         else:
