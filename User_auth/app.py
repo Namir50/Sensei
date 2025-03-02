@@ -56,7 +56,7 @@ def login():
         #Checks if user exists and the password is correct
         if user and check_password_hash(user.password_hash, password):  
             flash('Login Successful!')
-            return redirect(url_for('home'))
+            return redirect(url_for('landing'))
         else:
             flash('Invalid Email or Password, please try again')
 
