@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_owner:owners@localhost/sensei_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_owner:owners@localhost/sensei_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_db_user:vbBQTd7AaLMzMRgK0QKJpyOtlS3YNq8k@dpg-cv2ckaggph6c73bf0u0g-a.oregon-postgres.render.com/sensei_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'mysecretkey'  #Secret key for session management
 
