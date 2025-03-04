@@ -1,71 +1,79 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+# app.py (Flask backend)
+from flask import Flask, jsonify, request, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_owner:owners@localhost/sensei_db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sensei_db_user:vbBQTd7AaLMzMRgK0QKJpyOtlS3YNq8k@dpg-cv2ckaggph6c73bf0u0g-a.oregon-postgres.render.com/sensei_db'
+app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql://sensei_db_user:vbBQTd7AaLMzMRgK0QKJpyOtlS3YNq8k@dpg-cv2ckaggph6c73bf0u0g-a.oregon-postgres.render.com/sensei_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'mysecretkey'  #Secret key for session management
+app.config['SECRET_KEY'] = 'mysecretkey'
+
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # Allowing API routes only
 
 db = SQLAlchemy(app)
 
+#Database table creation
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  #Unique ID for each user
-    name = db.Column(db.String(100), nullable=False)  # User's full name (required)
-    email = db.Column(db.String(100), nullable=False, unique=True)  # User's email (must be unique)
-    password_hash = db.Column(db.String(150), nullable=False) # Encrypted password (hashed)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password_hash = db.Column(db.String(150), nullable=False)
 
-@app.route('/')
+# Landing Page API (No database interaction)
+@app.route('/landing')
 def landing():
-    return render_template('landing.html')
+    return jsonify({'message': 'Landing Page'}), 200
 
+# Teacher Page API (No database interaction)
 @app.route('/teacher')
 def teacher():
-    return render_template('index.html')
+    return jsonify({'message': 'Teacher Page'}), 200
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':  # Checks if the form is submitted
-        name = request.form['name']  # Get user name from the form
-        email = request.form['email']  # Get user email from the form
-        password_hash = generate_password_hash(request.form['password'], method='pbkdf2:sha256')   #Hashing the password
-
-        #Checking if the email is already registered
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash('Email already exists, Please log in', 'error') 
-            # Flash error message
-            return render_template('register.html')
-        #else
-        #Creating a new user record in the database
-        new_user = User(name=name, email=email, password_hash=password_hash)  # Using password_hash
-        db.session.add(new_user) #Adding new user to the session
-        db.session.commit()  #Commits changes to the database
-
-        flash('Registration Successful')
-
-    return render_template('register.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':  #Checking if login form ia submitted
-        email = request.form['email']
-        password = request.form['password']
-        user = User.query.filter_by(email=email).first()  # Look up user in database with the help of email
-
-        #Checks if user exists and the password is correct
-        if user and check_password_hash(user.password_hash, password):  
-            flash('Login Successful!')
-            return redirect(url_for('landing'))
-        else:
-            flash('Invalid Email or Password, please try again')
-
-    return render_template('login.html')
-
+# Student Page API (No database interaction)
 @app.route('/student')
 def student():
-    return render_template('student.html')
+    return jsonify({'message': 'Student Page'}), 200
+
+#Registeration Page API(Here dtaabase interation is there so added /api)
+@app.route('/api/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not name or not email or not password:
+        return jsonify({'message': 'Missing fields'}), 400
+
+    existing_user = User.query.filter_by(email=email).first()  #Checks if user exists in database
+    if existing_user:
+        return jsonify({'message': 'Email already exists'}), 400
+
+    password_hash = generate_password_hash(password, method='pbkdf2:sha256')
+    new_user = User(name=name, email=email, password_hash=password_hash)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': 'Registration successful'}), 201
+
+#Login Page API(Here database interaction is there so added /api)
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'message': 'Missing fields'}), 400
+
+    user = User.query.filter_by(email=email).first()  #Checks the very first user with the given email
+    if user and check_password_hash(user.password_hash, password): #Checks if the password is correct
+        session['user_id'] = user.id #Stores the user's id in the session
+        return jsonify({'message': 'Login successful'}), 200  
+    else:
+        return jsonify({'message': 'Invalid email or password'}), 401
 
 if __name__ == '__main__':
     with app.app_context():
