@@ -4,15 +4,13 @@ import './style/landing.css'
 
 function LandingPage() {
     return (
-        <div className='container'>
+        <div className='container-landing'>
             <h2 className='text-focus-in'>Welcome to Sensei App</h2>
             <div className='inputs-landing'>
-                <div className='input'>
-            <Link to="/teacher"><button>You're a Teacher</button></Link>
-            </div>
-            <div className='input'>
-            <Link to="/student"><button>You're a Student</button></Link>
-            </div>
+            <Link to="/teacher"><button className='button teacher'>You're a Teacher</button></Link>
+           
+            <Link to="/student"><button className='button student'>You're a Student</button></Link>
+           
         </div>
         </div>
     );

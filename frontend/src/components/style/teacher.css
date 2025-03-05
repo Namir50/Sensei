@@ -1,4 +1,4 @@
-.container-landing{
+.container-teacher{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -30,16 +30,14 @@ h2{
     
 }
 
-.teacher{
+.register{
     margin-right: 80px;
 }
-.student{
+.login{
     margin-left: 80px;
 }
 
-
-
-  .button {
+.button-teacher {
     min-width: 300px;
     min-height: 60px;
     display: inline-flex;
@@ -89,9 +87,6 @@ h2{
 .button:focus::before {
     opacity: 1;
 }
-
-
-
 
 
 
