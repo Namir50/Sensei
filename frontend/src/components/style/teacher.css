@@ -37,7 +37,7 @@ h2{
     margin-left: 80px;
 }
 
-.button-teacher {
+/* .button-teacher {
     min-width: 300px;
     min-height: 60px;
     display: inline-flex;
@@ -86,7 +86,59 @@ h2{
 .button:hover::before, 
 .button:focus::before {
     opacity: 1;
+} */
+
+.button-teacher {
+  min-width: 300px;
+  min-height: 60px;
+  display: inline-flex;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #313133;
+  background: linear-gradient(90deg, rgb(246, 247, 247) 0%, rgb(210, 216, 216) 100%);
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(248, 249, 248, 0.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none; /* Removes default blue outline */
+  position: relative;
+  padding: 10px;
 }
+
+.button-teacher::before {
+  content: '';
+  border-radius: 1000px;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  border: 6px solid #ffffff;  /* Changed to white */
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+.button-teacher:hover, 
+.button:focus {
+  color: #313133;
+  transform: translateY(-6px);
+  outline: none; /* Ensures no default focus outline */
+}
+
+.button-teacher:hover::before, 
+.button:focus::before {
+  opacity: 1;
+}
+
 
 
 

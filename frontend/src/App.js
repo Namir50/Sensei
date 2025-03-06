@@ -8,6 +8,8 @@ import StudentPage from './components/StudentPage.js'
 
 function App() {
     return (
+        <div className='bg'>
+           
         <Router>
             <Routes>
                 <Route path="/" element={<LandingPage />} />         //This '/' is the '/landing API from app.py'
@@ -17,6 +19,7 @@ function App() {
                 <Route path='/student' element={<StudentPage/>}/>    //This '/student' is '/student' API from app.py
             </Routes>
         </Router>
+        </div>
     );
 }
 
