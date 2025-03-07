@@ -14,12 +14,22 @@
 }
 
 h2{
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Franklin Gothic Medium";
     color: #ffffff;
     font-size: 70px;
     font-weight: 700;
     white-space: nowrap;
     margin-top: -150px;
+
+}
+
+h4{
+  font-family: "Franklin Gothic Medium";
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-top: -150px;
 
 }
 
@@ -145,8 +155,8 @@ h2{
 
 
 .text-focus-in {
-	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	-webkit-animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 /* ----------------------------------------------

@@ -17,7 +17,7 @@ function Login() {
         try {
             await axios.post('http://localhost:5000/api/login', { email, password });
             alert('Login successful!');
-            navigate('/');
+            navigate('/teacherhome');
         } catch (error) {
             alert(error.response.data.message || 'Login failed');
         }

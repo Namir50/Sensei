@@ -75,6 +75,7 @@ def login():
     else:
         return jsonify({'message': 'Invalid email or password'}), 401
 
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

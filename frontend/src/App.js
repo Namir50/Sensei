@@ -5,6 +5,7 @@ import Login from './components/Login.js';
 import TeacherPage from './components/TeacherPage.js';
 import LandingPage from './components/LandingPage.js';
 import StudentPage from './components/StudentPage.js'
+import TeacherHome from './components/TeacherHome.js';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/register" element={<Register />} />    //This '/register' is '/register' API from app.py
                 <Route path="/login" element={<Login />} />          //This '/login' is '/login' API from app.py
                 <Route path='/student' element={<StudentPage/>}/>    //This '/student' is '/student' API from app.py
+                <Route path= '/teacherhome' element={<TeacherHome/>} /> //This '/teacherhome' is '/teacherhome' API from app
             </Routes>
         </Router>
         </div>
