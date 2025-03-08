@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Register() {
+function TeacherRegister() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -9,7 +9,7 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/register', { name, email, password });
+            await axios.post('http://localhost:5000/api/register/teacher', { name, email, password });
             alert('Registration successful!');
         } catch (error) {
             alert(error.response.data.message || 'Registration failed');
@@ -26,4 +26,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default TeacherRegister;

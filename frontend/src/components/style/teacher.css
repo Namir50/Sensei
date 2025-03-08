@@ -1,93 +1,52 @@
-.container-teacher{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 100px;
-    width: 450px;
-    height: 450px;
-    /* background: #fff; */
-    padding-bottom: 20px;
-    border-radius: 8%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap   ;
+.container-teacher {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  width: 450px;
+  height: 450px;
+  padding-bottom: 20px;
+  border-radius: 8%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
-h2{
-    font-family: "Cormorant Garamond", serif;
-    color: #ffffff;
-    font-size: 70px;
-    font-weight: 700;
-    white-space: nowrap;
-    margin-top: -150px;
-
+h2 {
+  font-family: "Franklin Gothic Medium";
+  color: #ffffff;
+  font-size: 70px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-top: -150px;
 }
 
-.inputs-landing{
-    display: flex;
-    flex-direction: row;
-    margin-top: 100px;
-    
+h4 {
+  font-family: "Franklin Gothic Medium";
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-top: -150px;
 }
 
-.register{
-    margin-right: 80px;
-}
-.login{
-    margin-left: 80px;
-}
-
-/* .button-teacher {
-    min-width: 300px;
-    min-height: 60px;
-    display: inline-flex;
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 1.3px;
-    font-weight: 700;
-    color: #313133;
-    background: #4FD1C5;
-    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
-    border: none;
-    border-radius: 1000px;
-    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
-    transition: all 0.3s ease-in-out 0s;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    padding: 10px;
+.inputs-landing {
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
 }
 
-.button::before {
-    content: '';
-    border-radius: 1000px;
-    min-width: calc(300px + 12px);
-    min-height: calc(60px + 12px);
-    border: 6px solid #00FFCB;
-    box-shadow: 0 0 60px rgba(0,255,203,.64);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all .3s ease-in-out 0s;
+.register {
+  margin-right: 80px;
 }
 
-.button:hover, 
-.button:focus {
-    color: #313133;
-    transform: translateY(-6px);
+.login {
+  margin-left: 80px;
 }
 
-.button:hover::before, 
-.button:focus::before {
-    opacity: 1;
-} */
-
+/* Common Button Styles */
+.button-teacher-register,
+.button-teacher-login,
 .button-teacher {
   min-width: 300px;
   min-height: 60px;
@@ -100,89 +59,98 @@ h2{
   text-align: center;
   letter-spacing: 1.3px;
   font-weight: 700;
-  color: #313133;
-  background: linear-gradient(90deg, rgb(246, 247, 247) 0%, rgb(210, 216, 216) 100%);
   border: none;
   border-radius: 1000px;
-  box-shadow: 12px 12px 24px rgba(248, 249, 248, 0.64);
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
-  outline: none; /* Removes default blue outline */
+  outline: none;
   position: relative;
   padding: 10px;
 }
 
-.button-teacher::before {
+/* Register Button */
+.button-teacher-register {
+  color: #000000;
+  background: linear-gradient(90deg, rgb(255, 255, 255)0%, rgb(255, 255, 255) 100%);
+  box-shadow: 12px 12px 24px rgba(2, 2, 2, 0.64);
+}
+
+.button-teacher-register::before {
   content: '';
   border-radius: 1000px;
   min-width: calc(300px + 12px);
   min-height: calc(60px + 12px);
-  border: 6px solid #ffffff;  /* Changed to white */
+  border: 6px solid #ffffff;
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.64);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: all .3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out;
 }
 
-.button-teacher:hover, 
-.button:focus {
+/* Login Button */
+.button-teacher-login {
   color: #313133;
-  transform: translateY(-6px);
-  outline: none; /* Ensures no default focus outline */
+  background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+  box-shadow: 12px 12px 24px rgba(2, 2, 2, 0.64);
 }
 
-.button-teacher:hover::before, 
-.button:focus::before {
+.button-teacher-login::before {
+  content: '';
+  border-radius: 1000px;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  border: 6px solid #ffffff;
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effects */
+.button-teacher-register:hover,
+.button-teacher-login:hover {
+  transform: translateY(-6px);
+}
+
+.button-teacher-register:hover::before,
+.button-teacher-login:hover::before {
   opacity: 1;
 }
 
-
-
-
+/* <<<<<<< HEAD */
 
 
 .text-focus-in {
 	-webkit-animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
+.button-teacher-register {
+  margin-right: 80px;
+}
+.button-teacher-login {
+  margin-left: 80px;
+/* >>>>>>> a09517ece708756031815409d93e75c069e3cb85 */
+}
 
-/* ----------------------------------------------
- * Generated by Animista on 2025-3-5 18:31:50
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
+/* Animation for text focus */
+.text-focus-in {
+  animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
 
-/**
- * ----------------------------------------
- * animation text-focus-in
- * ----------------------------------------
- */
- @-webkit-keyframes text-focus-in {
-    0% {
-      -webkit-filter: blur(12px);
-              filter: blur(12px);
+/* Animation Keyframes */
+@keyframes text-focus-in {
+  0% {
+      filter: blur(12px);
       opacity: 0;
-    }
-    100% {
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
-      opacity: 1;
-    }
   }
-  @keyframes text-focus-in {
-    0% {
-      -webkit-filter: blur(12px);
-              filter: blur(12px);
-      opacity: 0;
-    }
-    100% {
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
+  100% {
+      filter: blur(0px);
       opacity: 1;
-    }
   }
-  
+}

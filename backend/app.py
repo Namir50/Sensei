@@ -15,11 +15,17 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})  # Allowing API routes only
 db = SQLAlchemy(app)
 
 #Database table creation
-class User(db.Model):
+class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(150), nullable=False)
+    
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(100), nullable = False)
+    email = db.Column(db.String(100), nullable = False, unique = True)
+    password_hash = db.Column(db.String(150),nullable = False)
 
 # Landing Page API (No database interaction)
 @app.route('/landing')
@@ -37,7 +43,7 @@ def student():
     return jsonify({'message': 'Student Page'}), 200
 
 #Registeration Page API(Here dtaabase interation is there so added /api)
-@app.route('/api/register', methods=['POST'])
+@app.route('/api/register/teacher', methods=['POST'])
 def register():
     data = request.get_json()
     name = data.get('name')
@@ -47,19 +53,19 @@ def register():
     if not name or not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
 
-    existing_user = User.query.filter_by(email=email).first()  #Checks if user exists in database
-    if existing_user:
+    existing_teacher = Teacher.query.filter_by(email=email).first()  #Checks if user exists in database
+    if existing_teacher:
         return jsonify({'message': 'Email already exists'}), 400
 
     password_hash = generate_password_hash(password, method='pbkdf2:sha256')
-    new_user = User(name=name, email=email, password_hash=password_hash)
-    db.session.add(new_user)
+    new_teacher = Teacher(name=name, email=email, password_hash=password_hash)
+    db.session.add(new_teacher)
     db.session.commit()
 
     return jsonify({'message': 'Registration successful'}), 201
 
 #Login Page API(Here database interaction is there so added /api)
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login/teacher', methods=['POST'])
 def login():
     data = request.get_json()
     email = data.get('email')
@@ -68,9 +74,9 @@ def login():
     if not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
 
-    user = User.query.filter_by(email=email).first()  #Checks the very first user with the given email
-    if user and check_password_hash(user.password_hash, password): #Checks if the password is correct
-        session['user_id'] = user.id #Stores the user's id in the session
+    teacher = Teacher.query.filter_by(email=email).first()  #Checks the very first user with the given email
+    if teacher and check_password_hash(teacher.password_hash, password): #Checks if the password is correct
+        session['teacher_id'] = teacher.id #Stores the user's id in the session
         return jsonify({'message': 'Login successful'}), 200  
     else:
         return jsonify({'message': 'Invalid email or password'}), 401

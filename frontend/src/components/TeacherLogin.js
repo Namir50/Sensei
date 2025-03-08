@@ -7,7 +7,7 @@ import password_icon from '../Assets/pass.png'
 import user_icon from '../Assets/user_3.png'
 
 
-function Login() {
+function TeacherLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -15,9 +15,9 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/login', { email, password });
+            await axios.post('http://localhost:5000/api/login/teacher', { email, password });
             alert('Login successful!');
-            navigate('/');
+            navigate('/teacherhome');
         } catch (error) {
             alert(error.response.data.message || 'Login failed');
         }
@@ -54,4 +54,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default TeacherLogin;
