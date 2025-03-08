@@ -30,33 +30,33 @@ function TeacherRegister() {
         // </form>
 
 <div className='container'>
-<div className="header">
+<div className="header-reg">
 <img src={user_icon} alt="" />
 <div className="text">SignUp</div>
 {/* <div className="underline"></div> */}
 </div>
 <form onSubmit={handleSubmit}>
-<div className='inputs'>
+<div className='inputs-reg'>
 
-    <div className="input">
+    <div className="input-reg">
                 <img src={user_icon} alt="" />
                 <input type="text" placeholder='Name'value={name} onChange={(e) => setName(e.target.value)}/>
             </div>
             <div className='line'></div>
 
-    <div className='input'>
+    <div className='input-reg'>
     <img src={email_icon} alt="" />
 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
 </div>
 <div className='line'></div>
-<div className='input'>
+<div className='input-reg'>
 <img src={password_icon} alt="" />
 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 </div>
 <div className='line'></div>
 
 <div className='submit-container'>
-<button className='submit-btn' type="submit">Login</button>
+<button className='submit-btn-reg' type="submit">Login</button>
 </div>
 </div>
 </form>
