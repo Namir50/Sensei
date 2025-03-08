@@ -53,8 +53,8 @@ def register():
     if not name or not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
 
-    existing_user = Teacher.query.filter_by(email=email).first()  #Checks if user exists in database
-    if existing_user:
+    existing_teacher = Teacher.query.filter_by(email=email).first()  #Checks if user exists in database
+    if existing_teacher:
         return jsonify({'message': 'Email already exists'}), 400
 
     password_hash = generate_password_hash(password, method='pbkdf2:sha256')
@@ -74,9 +74,9 @@ def login():
     if not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
 
-    user = Teacher.query.filter_by(email=email).first()  #Checks the very first user with the given email
-    if user and check_password_hash(user.password_hash, password): #Checks if the password is correct
-        session['user_id'] = user.id #Stores the user's id in the session
+    teacher = Teacher.query.filter_by(email=email).first()  #Checks the very first user with the given email
+    if teacher and check_password_hash(teacher.password_hash, password): #Checks if the password is correct
+        session['teacher_id'] = teacher.id #Stores the user's id in the session
         return jsonify({'message': 'Login successful'}), 200  
     else:
         return jsonify({'message': 'Invalid email or password'}), 401
