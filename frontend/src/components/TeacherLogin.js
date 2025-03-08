@@ -7,7 +7,7 @@ import password_icon from '../Assets/pass.png'
 import user_icon from '../Assets/user_3.png'
 
 
-function Login() {
+function TeacherLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -54,4 +54,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default TeacherLogin;
