@@ -15,7 +15,7 @@ function TeacherLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/login', { email, password });
+            await axios.post('http://localhost:5000/api/login/teacher', { email, password });
             alert('Login successful!');
             navigate('/teacherhome');
         } catch (error) {
