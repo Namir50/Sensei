@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './style/teacher.css'
+// import './style/teacher.css'
+import './style/landing.css'
 
 function TeacherPage() {
     return (

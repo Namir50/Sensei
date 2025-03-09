@@ -3,7 +3,7 @@ import axios from 'axios';
 import email_icon from '../Assets/mail.png'
 import password_icon from '../Assets/pass.png'
 import user_icon from '../Assets/user_3.png'
-import './style/teacher-register.css'
+import './style/auth.css'
 
 
 function StudentRegister() {

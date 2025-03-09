@@ -1,5 +1,5 @@
 import React from 'react';
-import './style/teacher.css';
+import './style/landing.css';
 function TeacherHome() {
     return <div>
         <h4>This Page displays the insights of the logged in Teacher, such as profile views, numbers of students tried contacting,etc</h4>
