@@ -7,8 +7,8 @@ function StudentPage(){
         <div className='container-teacher'>
         <h2 className='text-focus-in'>Welcome Student!</h2>
         <div className='inputs-landing'>
-        <Link to="/register/teacher"><button className='button-teacher-register'>Register</button></Link>
-        <Link to="/login/teacher"><button className='button-teacher-login'>Login</button></Link>
+        <Link to="/register/student"><button className='button-teacher-register'>Register</button></Link>
+        <Link to="/login/student"><button className='button-teacher-login'>Login</button></Link>
         </div>
         </div>
     </div>

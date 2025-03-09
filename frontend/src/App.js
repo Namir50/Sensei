@@ -6,6 +6,8 @@ import TeacherPage from './components/TeacherPage.js';
 import LandingPage from './components/LandingPage.js';
 import StudentPage from './components/StudentPage.js'
 import TeacherHome from './components/TeacherHome.js';
+import StudentRegister from './components/StudentRegister.js';
+import StudentLogin from './components/StudentLogin.js';
 
 function App() {
     return (
@@ -17,8 +19,10 @@ function App() {
                 <Route path="/teacher" element={<TeacherPage />} />  //This '/teacher' is '/teacher' API from app.py
                 <Route path="/register/teacher" element={<TeacherRegister />} />    //This '/register' is '/register' API from app.py
                 <Route path="/login/teacher" element={<TeacherLogin />} />          //This '/login' is '/login' API from app.py
-                <Route path='/student' element={<StudentPage/>}/>    //This '/student' is '/student' API from app.py
+                <Route path="/student" element={<StudentPage/>}/>    //This '/student' is '/student' API from app.py
                 <Route path= '/teacherhome' element={<TeacherHome/>} /> //This '/teacherhome' is '/teacherhome' API from app
+                <Route path="/register/student" element={<StudentRegister />} />
+                <Route path ="/login/student" element = {<StudentLogin/> } />
             </Routes>
         </Router>
         </div>

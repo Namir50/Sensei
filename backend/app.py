@@ -44,7 +44,7 @@ def student():
 
 #Registeration Page API(Here dtaabase interation is there so added /api)
 @app.route('/api/register/teacher', methods=['POST'])
-def register():
+def register_teacher():
     data = request.get_json()
     name = data.get('name')
     email = data.get('email')
@@ -66,7 +66,7 @@ def register():
 
 #Login Page API(Here database interaction is there so added /api)
 @app.route('/api/login/teacher', methods=['POST'])
-def login():
+def login_teacher():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
@@ -77,6 +77,43 @@ def login():
     teacher = Teacher.query.filter_by(email=email).first()  #Checks the very first user with the given email
     if teacher and check_password_hash(teacher.password_hash, password): #Checks if the password is correct
         session['teacher_id'] = teacher.id #Stores the user's id in the session
+        return jsonify({'message': 'Login successful'}), 200  
+    else:
+        return jsonify({'message': 'Invalid email or password'}), 401
+
+@app.route('/api/register/student', methods=['POST'])
+def register_student():
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not name or not email or not password:
+        return jsonify({'message': 'Missing fields'}), 400
+
+    existing_student = Student.query.filter_by(email=email).first()  #Checks if user exists in database
+    if existing_student:
+        return jsonify({'message': 'Email already exists'}), 400
+
+    password_hash = generate_password_hash(password, method='pbkdf2:sha256')
+    new_student = Student(name=name, email=email, password_hash=password_hash)
+    db.session.add(new_student)
+    db.session.commit()
+    
+    return jsonify({'message': 'Registration successful'}), 201
+    
+@app.route('/api/login/student', methods=['POST'])
+def login_student():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'message': 'Missing fields'}), 400
+
+    student = Student.query.filter_by(email=email).first()  #Checks the very first user with the given email
+    if student and check_password_hash(student.password_hash, password): #Checks if the password is correct
+        session['student_id'] = student.id #Stores the user's id in the session
         return jsonify({'message': 'Login successful'}), 200  
     else:
         return jsonify({'message': 'Invalid email or password'}), 401
