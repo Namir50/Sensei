@@ -10,9 +10,9 @@ function LandingPage() {
             <h2 className='text-focus-in'>Welcome to Sensei App</h2>
             <div className='inputs-landing'>
                 <img src={teach_icon} alt="" />
-            <Link to="/teacher"><button className='button teacher'>You're a Teacher</button></Link>
+            <Link to="/teacher"><button className='but teacher'>You're a Teacher</button></Link>
            
-            <Link to="/student"><button className='button student'>You're a Student</button></Link>
+            <Link to="/student"><button className='but student'>You're a Student</button></Link>
             <img src={stud_icon} alt="" />
            
         </div>

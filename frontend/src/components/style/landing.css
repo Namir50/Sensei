@@ -14,7 +14,7 @@
     z-index: 2;
 }
 
-h2{
+.text-focus-in{
     font-family: "Franklin Gothic Medium";
     color: #ffffff;
     font-size: 70px;
@@ -46,7 +46,7 @@ h2{
 }
 
 
-.button {
+.but {
   min-width: 300px;
   min-height: 60px;
   display: inline-flex;
@@ -70,7 +70,7 @@ h2{
   padding: 10px;
 }
 
-.button::before {
+.but::before {
   content: '';
   border-radius: 1000px;
   min-width: calc(300px + 12px);
@@ -85,15 +85,15 @@ h2{
   transition: all .3s ease-in-out 0s;
 }
 
-.button:hover, 
-.button:focus {
+.but:hover, 
+.but:focus {
   color: #313133;
   transform: translateY(-6px);
   outline: none; /* Ensures no default focus outline */
 }
 
-.button:hover::before, 
-.button:focus::before {
+.but:hover::before, 
+.but:focus::before {
   opacity: 1;
 }
 
