@@ -11,16 +11,17 @@ function TeacherLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/api/login/teacher', { email, password });
-            alert('Login successful!');
+        const response = await axios.post('http://localhost:5000/api/login/teacher', { email, password },);
+
+        if (response && response.data) {
+            alert(response.data.message);
             navigate('/teacherhome');
-        } catch (error) {
-            alert(error.response.data.message || 'Login failed');
+        } else {
+            alert('Unexpected response format');
         }
+
     };
 
     return (

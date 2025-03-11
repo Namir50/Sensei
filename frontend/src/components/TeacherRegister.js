@@ -56,7 +56,7 @@ function TeacherRegister() {
 <div className='line'></div>
 
 <div className='submit-container'>
-<button className='submit-btn-reg' type="submit">Login</button>
+<button className='submit-btn-reg' type="submit">Register</button>
 </div>
 </div>
 </form>
