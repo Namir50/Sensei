@@ -20,6 +20,17 @@ class Teacher(db.Model):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(150), nullable=False)
+    profile_image = db.Column(db.String(255), nullable=True, default=None)
+    skills = db.Column(db.Text, nullable=True, default=None)
+    subjects = db.Column(db.Text, nullable=True, default=None)
+    qualifications = db.Column(db.Text, nullable=True, default=None)
+    location = db.Column(db.String(255), nullable=True, default=None)
+    video_url = db.Column(db.String(255), nullable=True, default=None)
+    age = db.Column(db.Integer, nullable=True, default=None)
+    phone_number = db.Column(db.String(20), nullable=True, default=None)
+    profile_views = db.Column(db.Integer, default=0)
+    phone_clicks = db.Column(db.Integer, default=0)
+    student_count = db.Column(db.Integer, default=0)
     
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -53,7 +64,7 @@ def register_teacher():
     if not name or not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
 
-    existing_teacher = Teacher.query.filter_by(email=email).first()  #Checks if user exists in database
+    existing_teacher = Teacher.query.filter_by(email=email).first()
     if existing_teacher:
         return jsonify({'message': 'Email already exists'}), 400
 
@@ -63,6 +74,7 @@ def register_teacher():
     db.session.commit()
 
     return jsonify({'message': 'Registration successful'}), 201
+
 
 #Login Page API(Here database interaction is there so added /api)
 @app.route('/api/login/teacher', methods=['POST'])
