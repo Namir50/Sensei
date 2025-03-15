@@ -92,6 +92,57 @@ def login_teacher():
         return jsonify({'message': 'Login successful'}), 200  
     else:
         return jsonify({'message': 'Invalid email or password'}), 401
+    
+#Fetching Teacher profile data
+@app.route('/api/teacher/profile', methods = ['GET'])
+def get_teacher_profile():
+    teacher_id = session.get('teacher_id')
+    if not teacher_id:
+        return jsonify({'message':'Unauthorized'}), 401
+    
+    teacher = Teacher.query.get(teacher_id)
+    if not teacher:
+        return jsonify({'message':'Teacher not found'}), 404 
+    
+    return jsonify({
+        'id' :teacher.id,
+        'name': teacher.name,
+        'email': teacher.email,
+        'profile_image': teacher.profile_image,
+        'skills': teacher.skills,
+        'subjects': teacher.subjects,
+        'qualifications': teacher.qualification,
+        'location': teacher.location,
+        'video_url': teacher.video_url,
+        'age': teacher.age,
+        'phone_number': teacher.phone_number,
+    }), 200
+    
+#  Update Teacher Profile (PUT)
+@app.route('/api/teacher/profile', methods=['PUT'])
+def update_teacher_profile():
+    teacher_id = session.get('teacher_id')  # Check if teacher is logged in
+    if not teacher_id:
+        return jsonify({'message': 'Unauthorized'}), 401
+
+    data = request.get_json()
+    
+    teacher = Teacher.query.get(teacher_id)
+    if not teacher:
+        return jsonify({'message': 'Teacher not found'}), 404
+    
+    teacher.profile_image = data.get('profile_image', teacher.profile_image)
+    teacher.skills = data.get('skills', teacher.skills)
+    teacher.subjects = data.get('subjects', teacher.subjects)
+    teacher.qualifications = data.get('qualifications', teacher.qualifications)
+    teacher.location = data.get('location', teacher.location)
+    teacher.video_url = data.get('video_url', teacher.video_url)
+    teacher.age = data.get('age', teacher.age)
+    teacher.phone_number = data.get('phone_number', teacher.phone_number)
+    
+    db.session.commit()
+    return jsonify({'message': 'Profile updated successfully'}), 200
+
 
 @app.route('/api/register/student', methods=['POST'])
 def register_student():
