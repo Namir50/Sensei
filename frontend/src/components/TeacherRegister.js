@@ -4,22 +4,28 @@ import email_icon from '../Assets/mail.png'
 import password_icon from '../Assets/pass.png'
 import user_icon from '../Assets/user_3.png'
 import './style/auth.css'
+import { useNavigate } from 'react-router-dom';
 
 
 function TeacherRegister() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/register/teacher', { name, email, password });
             alert('Registration successful!');
+            navigate("/login/teacher");
         } catch (error) {
             alert(error.response.data.message || 'Registration failed');
         }
     };
+
+
+    
 
     return (
         // <form onSubmit={handleSubmit}>
