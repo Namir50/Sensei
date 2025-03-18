@@ -143,6 +143,24 @@ def update_teacher_profile():
     db.session.commit()
     return jsonify({'message': 'Profile updated successfully'}), 200
 
+@app.route('/api/teacher/dashboard', methods =['GET'])
+def get_teacher_dashboard():
+    teacher_id = session.get('teacher_id')
+    if not teacher_id:
+        return jsonify({'message': 'Unauthorized'}), 401
+    
+    teacher = Teacher.query.get(teacher_id)
+    
+    if not teacher:
+        return jsonify({'message' :'Teacher not found'}), 404
+    
+    return jsonify({
+        'name' :teacher.name,
+        'students_enrolled' : teacher.student_count,
+        'profile_views': teacher.profile_views,
+        'phone_number_clicks' : teacher.phone_clicks
+    }), 200
+
 
 @app.route('/api/register/student', methods=['POST'])
 def register_student():
