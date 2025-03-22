@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import './style/teacherHome.css';
-import { Menu } from 'lucide-react'; //hamburger 
+import { Menu } from 'lucide-react';
 import logo_icon from '../Assets/Sensei-logo.png';
 import profile from '../Assets/profile_icon.png';
 
-
 function TeacherHome() {
-  //profile photo drop down
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -15,44 +14,54 @@ function TeacherHome() {
 
   const handleOptionClick = (option) => {
     console.log(`${option} clicked`);
-    setIsDropdownOpen(false); // Close dropdown after selection
+    setIsDropdownOpen(false);
   };
-  
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
 
   return (
     <div className="teacher-home">
-    <header>
-      {/* Hamburger Menu */}
-      <div className="hamburger">
-        <Menu size={35} />
-      </div>
-
-      {/* Logo Section */}
-      <div className="logo-container">
-        <img src={logo_icon} alt="logo" className='logo' />
-        <div className='logo-text'>SENSEI</div>
-      </div>
-
-      {/* Profile Section */}
-      <div className="profile-container">
-        <div className="profile" onClick={toggleDropdown}>
-          <img src={profile} alt="Profile" />
+      <header>
+        {/* Hamburger Menu */}
+        <div className="hamburger" onClick={toggleSidebar}>
+          <Menu size={35} />
         </div>
-        
-        {isDropdownOpen && (
-          <div className="dropdown">
-            <ul>
-              <li onClick={() => handleOptionClick('View Profile')}>View Profile</li>
-              <li onClick={() => handleOptionClick('Edit Profile')}>Edit Profile</li>
-              <li onClick={() => handleOptionClick('Logout')}>Logout</li>
-            </ul>
+
+        {/* Logo Section */}
+        <div className="logo-container">
+          <img src={logo_icon} alt="logo" className='logo' />
+          <div className='logo-text'>SENSEI</div>
+        </div>
+
+        {/* Profile Section */}
+        <div className="profile-container">
+          <div className="profile" onClick={toggleDropdown}>
+            <img src={profile} alt="Profile" />
           </div>
-        )}
+          
+          {isDropdownOpen && (
+            <div className="dropdown">
+              <ul>
+                <li onClick={() => handleOptionClick('View Profile')}>View Profile</li>
+                <li onClick={() => handleOptionClick('Edit Profile')}>Edit Profile</li>
+                <li onClick={() => handleOptionClick('Logout')}>Logout</li>
+              </ul>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Sidebar */}
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <ul>
+          <li onClick={() => console.log('Activate Account clicked')}>Activate Account</li>
+          <li onClick={() => console.log('Settings clicked')}>Settings</li>
+        </ul>
       </div>
-    </header>
     </div>
   );
 }
-
 
 export default TeacherHome;
