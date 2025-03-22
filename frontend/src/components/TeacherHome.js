@@ -17,8 +17,10 @@ function TeacherHome() {
     console.log(`${option} clicked`);
     setIsDropdownOpen(false); // Close dropdown after selection
   };
+  
 
   return (
+    <div className="teacher-home">
     <header>
       {/* Hamburger Menu */}
       <div className="hamburger">
@@ -48,7 +50,9 @@ function TeacherHome() {
         )}
       </div>
     </header>
+    </div>
   );
 }
+
 
 export default TeacherHome;
