@@ -25,10 +25,23 @@ header {
 
 .hamburger {
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 25px;
   color: black;
+  font-size: 32px; /* Increases size of ☰ */
+  width: 50px;  /* Optional: Controls width */
+  height: 50px; /* Optional: Controls height */
 }
 
+.close-btn {
+  position: absolute;
+  top: 32px; /* Match the hamburger's margin-top */
+  left: 20px; /* Align with the hamburger's padding */
+  font-size: 32px; /* Same size as the hamburger */
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  background: none;
+  border: none;
+}
 /* Sidebar Styles */
 .sidebar {
   position: fixed;
@@ -36,10 +49,10 @@ header {
   left: 0;
   width: 350px; /* Increased width */
   height: 100vh;
-  background: rgba(255, 255, 255, 0.1);
+  background-color: black;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-right: 1px solid rgba(0, 0, 0, 0.18);
   box-shadow: 6px 0 24px rgba(31, 38, 135, 0.37);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
@@ -59,33 +72,97 @@ header {
 .sidebar li {
   padding: 15px 20px;
   font-size: 18px;
-  color: black;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .sidebar li:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(191, 191, 191, 0.1);
 }
 
-.logo {
-  max-width: 65px;
-  font-weight: bold;
-  margin-right: 15px;
-  margin-top: 10px;
+.sensei-logo {
+  width: 75px;  /* Match profile pic size */
+  height: 75px; /* Ensure it's square */
+  object-fit: cover; /* Prevent distortion */
+  margin-right: 100px;
+  margin-top: 20px;
+  margin-left: 60px;
 }
 
-.logo-container {
+.sensei-text{
+  font-family: "Franklin Gothic Medium";
+  margin-left: 150px;
+  margin-top: -60px;
+
+}
+.sensei-logo-container {
   font-family: "Franklin Gothic Medium";
   justify-content: space-between;
   margin-right: 38cm;
   display: flex;
 }
 
+.dashboard-info h1 {
+  font-family: "Franklin Gothic Medium";
+  font-size: 50px;
+  font-weight: bold;
+  color: black; /* Ensure text is visible */
+  text-align: left;
+  margin-top: 80px; /* Adjust spacing */
+  margin-left: 60px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px; /* Prevent full-width issue */
+}
+
+.dashboard-info h2 {
+  font-family: "Franklin Gothic Medium";
+  font-size: 30px;
+  font-weight: bold;
+  color: black; /* Ensure text is visible */
+  text-align: center;
+  margin-top: -10px; /* Adjust spacing */
+  margin-left: 60px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block; /* Prevent full-width issue */
+}
+
+.dashboard-info p {
+  font-family: "Franklin Gothic Medium";
+  font-size: 25px;
+  color: black; /* Ensure text is visible */
+  text-align: left;
+  margin-top: 1px; /* Adjust spacing */
+  margin-left: 60px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
 .logo-text {
   font-size: 40px;
   margin-top: 20px;
   color: black;
+  opacity: 0; /* Start invisible to prevent flash before animation */
+}
+
+.logo-text-focus-in {
+  animation: text-focus-in 0.7s ease-in-out both;
 }
 
 /* Profile Section */
@@ -94,18 +171,19 @@ header {
 }
 
 .profile img {
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 50px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 /* Transparent Dropdown with Glassmorphic Effect */
 .dropdown {
   position: absolute;
-  top: 70px;
+  top: 80px;
   right: 80px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -138,6 +216,8 @@ header {
 .dropdown li:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+
 
 /* Optional: Add Animation */
 @keyframes fadeIn {

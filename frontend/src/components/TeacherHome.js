@@ -1,85 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import './style/teacherHome.css';
-import { Menu } from 'lucide-react';
-import logo_icon from '../Assets/Sensei-logo.png';
-import profile from '../Assets/profile_icon.png';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./style/teacherHome.css"; // Ensure this is the correct path
 
 function TeacherHome() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [teacherData, setTeacherData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
+    useEffect(() => {
+        const fetchTeacherData = async () => {
+            try {
+                const response = await axios.get("http://localhost:5000/api/teacher/dashboard", {
+                    withCredentials: true, // Ensures session cookie is sent
+                });
 
-  const handleOptionClick = (option) => {
-    console.log(`${option} clicked`);
-    setIsDropdownOpen(false);
-  };
+                if (response.status === 200) {
+                    setTeacherData(response.data);
+                } else {
+                    throw new Error("Failed to fetch teacher details");
+                }
+            } catch (err) {
+                console.error("Error fetching teacher data:", err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+        fetchTeacherData();
+    }, []);
 
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+    return (
+        <div className="teacher-home">
+            {/* Header with Sidebar Toggle */}
+            <header>
+                <div className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                    ☰
+                </div>
+                <div className="logo-container">
+                    <h1 className="logo-text">Teacher Dashboard</h1>
+                </div>
+                <div className="profile">
+                    <img
+                        src="/profile_icon.png" // Replace with teacher's profile image if available
+                        alt="Profile"
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                    />
+                    {dropdownOpen && (
+                        <div className="dropdown">
+                            <ul>
+                                <li>Profile</li>
+                                <li>Settings</li>
+                                <li>Logout</li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </header>
 
-  // Close sidebar when clicking outside
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (isSidebarOpen && !event.target.closest('.sidebar') && !event.target.closest('.hamburger')) {
-        closeSidebar();
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [isSidebarOpen]);
-
-  return (
-    <div className="teacher-home">
-      <header>
-        {/* Hamburger Menu */}
-        <div className="hamburger" onClick={toggleSidebar}>
-          <Menu size={35} />
-        </div>
-
-        {/* Logo Section */}
-        <div className="logo-container">
-          <img src={logo_icon} alt="logo" className='logo' />
-          <div className='logo-text'>SENSEI</div>
-        </div>
-
-        {/* Profile Section */}
-        <div className="profile-container">
-          <div className="profile" onClick={toggleDropdown}>
-            <img src={profile} alt="Profile" />
-          </div>
-          
-          {isDropdownOpen && (
-            <div className="dropdown">
+            {/* Sidebar */}
+            <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+               <div className="sidebar-header">
+                  <span className="close-btn" onClick={() => setSidebarOpen(false)}>✖</span>
+               </div>
               <ul>
-                <li onClick={() => handleOptionClick('View Profile')}>View Profile</li>
-                <li onClick={() => handleOptionClick('Edit Profile')}>Edit Profile</li>
-                <li onClick={() => handleOptionClick('Logout')}>Logout</li>
-              </ul>
+                <li>Settings</li>
+                <li>Subscription</li>
+             </ul>
             </div>
-          )}
-        </div>
-      </header>
 
-      {/* Sidebar */}
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <ul>
-          <li onClick={() => console.log('Activate Account clicked')}>Activate Account</li>
-          <li onClick={() => console.log('Settings clicked')}>Settings</li>
-        </ul>
-      </div>
-    </div>
-  );
+            <div className="logo-container">
+              <img src="/Sensei-logo.png" alt="Sensei Logo" className="sensei-logo" />
+              <h1 className="sensei-text">SENSEI</h1>
+            </div>
+
+            {/* Main Dashboard Content */}
+            <div className="dashboard">
+                {loading ? (
+                    <p>Loading data...</p>
+                ) : error ? (
+                    <p style={{ color: "red" }}>Error: {error}</p>
+                ) : (
+                    <div className="dashboard-info">
+                        <h1>Dashboard</h1>
+                        <h2>Welcome {teacherData?.name ? teacherData.name : "Teacher"}</h2>
+                        <p>📚 Students Enrolled: {teacherData.students_enrolled}</p>
+                        <p>👀 Profile Views: {teacherData.profile_views}</p>
+                        <p>📞 Phone Clicks: {teacherData.phone_number_clicks}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }
 
 export default TeacherHome;
