@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./style/teacherHome.css"; // Ensure this is the correct path
+import "./style/teacherHome.css";
 
 function TeacherHome() {
     const [teacherData, setTeacherData] = useState(null);
@@ -13,7 +13,7 @@ function TeacherHome() {
         const fetchTeacherData = async () => {
             try {
                 const response = await axios.get("http://localhost:5000/api/teacher/dashboard", {
-                    withCredentials: true, // Ensures session cookie is sent
+                    withCredentials: true,
                 });
 
                 if (response.status === 200) {
@@ -44,7 +44,7 @@ function TeacherHome() {
                 </div>
                 <div className="profile">
                     <img
-                        src="/profile_icon.png" // Replace with teacher's profile image if available
+                        src="/profile_icon.png"
                         alt="Profile"
                         onClick={() => setDropdownOpen(!dropdownOpen)}
                     />
@@ -62,18 +62,22 @@ function TeacherHome() {
 
             {/* Sidebar */}
             <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-               <div className="sidebar-header">
-                  <span className="close-btn" onClick={() => setSidebarOpen(false)}>✖</span>
-               </div>
-              <ul>
-                <li>Settings</li>
-                <li>Subscription</li>
-             </ul>
+                <div className="sidebar-header">
+                    <span className="close-btn" onClick={() => setSidebarOpen(false)}>
+                        ✖
+                    </span>
+                </div>
+                <ul>
+                    <li>Settings</li>
+                    <li>Subscription</li>
+                    <li>Information</li>
+                    <li>Help</li>
+                </ul>
             </div>
 
             <div className="logo-container">
-              <img src="/Sensei-logo.png" alt="Sensei Logo" className="sensei-logo" />
-              <h1 className="sensei-text">SENSEI</h1>
+                <img src="/Sensei-logo.png" alt="Sensei Logo" className="sensei-logo" />
+                <h1 className="sensei-text">SENSEI</h1>
             </div>
 
             {/* Main Dashboard Content */}

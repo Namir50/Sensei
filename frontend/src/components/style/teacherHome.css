@@ -1,71 +1,25 @@
-/* Background and Text for Teacher Home Only */
 .teacher-home {
   background-color: white;
   color: black;
   min-height: 100vh;
   width: 100vw;
-}
-
-/* Adjust header styles if necessary */
-header {
-  background-color: transparent;
-  width: 100%;
-  height: 60px;
-  color: black;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  margin-top: 15px;
 }
 
-.hamburger {
-  cursor: pointer;
-  margin-top: 25px;
-  color: black;
-  font-size: 32px; /* Increases size of ☰ */
-  width: 50px;  /* Optional: Controls width */
-  height: 50px; /* Optional: Controls height */
-}
-
-.close-btn {
-  position: absolute;
-  top: 32px; /* Match the hamburger's margin-top */
-  left: 20px; /* Align with the hamburger's padding */
-  font-size: 32px; /* Same size as the hamburger */
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  background: none;
-  border: none;
-}
-/* Sidebar Styles */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 350px; /* Increased width */
+  width: 350px;
   height: 100vh;
   background-color: black;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-right: 1px solid rgba(0, 0, 0, 0.18);
   box-shadow: 6px 0 24px rgba(31, 38, 135, 0.37);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 2000;
-}
-
-.sidebar.open {
-  transform: translateX(0);
+  z-index: 1000;
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 120px 20px; /* Moved items lower */
+  padding: 120px 20px;
   margin: 0;
 }
 
@@ -81,21 +35,52 @@ header {
   background-color: rgba(191, 191, 191, 0.1);
 }
 
+.dashboard-sidebar-item { /* Style for Dashboard in sidebar */
+  font-family: "Franklin Gothic Medium";
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  cursor: default; /* No hover effect */
+}
+
+.content-container {
+  flex-grow: 1;
+  margin-left: 350px;
+  width: calc(100% - 350px);
+}
+
+header {
+  background-color: transparent;
+  width: 100%;
+  height: 60px;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 350px;
+  z-index: 1000;
+  margin-top: 15px;
+}
+
 .sensei-logo {
-  width: 75px;  /* Match profile pic size */
-  height: 75px; /* Ensure it's square */
-  object-fit: cover; /* Prevent distortion */
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
   margin-right: 100px;
   margin-top: 20px;
   margin-left: 60px;
 }
 
-.sensei-text{
+.sensei-text {
   font-family: "Franklin Gothic Medium";
+  font-weight: 900;
   margin-left: 150px;
   margin-top: -60px;
-
 }
+
 .sensei-logo-container {
   font-family: "Franklin Gothic Medium";
   justify-content: space-between;
@@ -107,41 +92,40 @@ header {
   font-family: "Franklin Gothic Medium";
   font-size: 50px;
   font-weight: bold;
-  color: black; /* Ensure text is visible */
+  color: black;
   text-align: left;
-  margin-top: 80px; /* Adjust spacing */
+  margin-top: 80px;
   margin-left: 60px;
   background-color: #ffffff;
   padding: 10px;
-  border-radius: 8px; /* Prevent full-width issue */
+  border-radius: 8px;
 }
 
 .dashboard-info h2 {
   font-family: "Franklin Gothic Medium";
   font-size: 30px;
   font-weight: bold;
-  color: black; /* Ensure text is visible */
+  color: black;
   text-align: center;
-  margin-top: -10px; /* Adjust spacing */
+  margin-top: -10px;
   margin-left: 60px;
   background-color: #ffffff;
   padding: 10px;
   border-radius: 8px;
-  display: inline-block; /* Prevent full-width issue */
+  display: inline-block;
 }
 
 .dashboard-info p {
   font-family: "Franklin Gothic Medium";
   font-size: 25px;
-  color: black; /* Ensure text is visible */
+  color: black;
   text-align: left;
-  margin-top: 1px; /* Adjust spacing */
+  margin-top: 1px;
   margin-left: 60px;
   background-color: #ffffff;
   padding: 10px;
   border-radius: 8px;
 }
-
 
 @keyframes text-focus-in {
   0% {
@@ -158,14 +142,13 @@ header {
   font-size: 40px;
   margin-top: 20px;
   color: black;
-  opacity: 0; /* Start invisible to prevent flash before animation */
+  opacity: 0;
 }
 
 .logo-text-focus-in {
   animation: text-focus-in 0.7s ease-in-out both;
 }
 
-/* Profile Section */
 .profile {
   position: relative;
 }
@@ -180,7 +163,6 @@ header {
   margin-top: 20px;
 }
 
-/* Transparent Dropdown with Glassmorphic Effect */
 .dropdown {
   position: absolute;
   top: 80px;
@@ -197,7 +179,6 @@ header {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Dropdown List */
 .dropdown ul {
   list-style: none;
   margin: 0;
@@ -212,14 +193,10 @@ header {
   transition: background-color 0.3s;
 }
 
-/* Hover Effect */
 .dropdown li:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-
-
-/* Optional: Add Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -229,4 +206,8 @@ header {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.hamburger, .close-btn {
+  display: none;
 }
